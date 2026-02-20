@@ -1,0 +1,14 @@
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.nav
+*.gz
+*.snm
+*.pptx
+--*
+.~*
+TIPE/*
