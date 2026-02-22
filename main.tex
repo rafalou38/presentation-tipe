@@ -235,12 +235,16 @@
 \end{frame}
 
 \begin{frame}{Analyse des solutions}
-    Solution homogène en amplitude:
+    Solution homogène:
     % \[
     % \underline x(t) = \underline X_h \exp{\left(\left[-\frac{\omega_0}{2Q} + i\omega_0 \sqrt{\frac{1}{4Q^2} - 1}\right]t\right)}
     % \]
     \[
-    \underline x(t) = \underline X_h e^{(r+i\Omega)t} \qquad \text{avec } r = -\frac{\omega_0}{2Q} \text{ et } \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1}
+    \underline x(t) = \underline X_h e^{(r+i\Omega)t} \qquad
+    \]
+
+    \[
+    r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1} = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{eff}}{m}}
     \]
 
     \begin{columns}
@@ -308,18 +312,27 @@
 
     Equation différentielle associée:
     \[
-    m x''(t) + \alpha x'(t) + k x(t) = F_0 \cos(\omega t + \varphi_0)
+    mx''(t) + \frac{m\omega_0}{Q} x'(t) + k x(t) = F_0 \cos(\omega t + \varphi_0)
     \]
 
     Solution particulière:
     \[
     \underline x_p(t) = X_0 e^{i(\omega t + \varphi_p)}
     \]
+    % \[
+    % \implies \underline x_p(t) = \frac{F_0\cos(\omega t + \varphi_0)}{(k-\omega^2 m) + i\alpha\omega}
+    % \]
+    % \[
+    % \tan(\varphi_p) = \frac{\alpha\omega}{k-\omega^2 m}
+    % \]
+
     \[
-    \implies \underline x_p(t) = \frac{F_0\cos(\omega t + \varphi_0)}{(k-\omega^2 m) + i\alpha\omega}
+    \tan (\varphi_p) = - \frac{m\omega_0\omega}{Q(k - m\omega^2)}
     \]
+
+    Avec aimant:
     \[
-    \implies \tan(\varphi_p) = \frac{\alpha\omega}{k-\omega^2 m}
+    \tan(\varphi_p) = \frac{\alpha\omega}{k - \partial -\omega^2 m}
     \]
 \end{frame}
 
