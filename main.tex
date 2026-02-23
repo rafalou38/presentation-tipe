@@ -9,6 +9,8 @@
 \usepackage{svg}
 \usepackage{tikz}
 \usepackage{esvect}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
 \usetikzlibrary{%
   decorations.pathmorphing,   % pour ressorts et ondulations
@@ -244,7 +246,7 @@
     \]
 
     \[
-    r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1} = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{eff}}{m}}
+    r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1} = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
     \]
 
     \begin{columns}
@@ -307,29 +309,60 @@
 \begin{frame}{Oscillation forcée}
     Force d'excitation harmonique:
     \[
-    F(t) = F_0 \cos(\omega t + \varphi_0)
+    F(t) = F_0 \cos(\omega t)
     \]
 
     Equation différentielle associée:
     \[
-    mx''(t) + \frac{m\omega_0}{Q} x'(t) + k x(t) = F_0 \cos(\omega t + \varphi_0)
+    \underline {x}''(t) + \frac{\omega_0}{Q} \underline {x}'(t) + \omega_0^2 \underline {x}(t) = F_0 e^{i\omega t} \qquad \omega_0^2 = \frac{k_{e}}{m}
     \]
 
     Solution particulière:
-    \[
-    \underline x_p(t) = X_0 e^{i(\omega t + \varphi_p)}
-    \]
-    \[
-    \underline x_p(t) = \frac{F_0\cos(\omega t + \varphi_0)}{(k-\omega^2 m) + i\frac{m\omega\omega_0}{Q}}
-    \]
-    
-    % \[
-    % \tan(\varphi_p) = \frac{\alpha\omega}{k-\omega^2 m}
-    % \]
+
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
 
     \[
-    \tan (\varphi_p) = \frac{m\omega_0\omega}{Q(k - m\omega^2)}
+    \underline x_p(t) = X_m e^{i(\omega t + \varphi_p)}
     \]
+    \[
+    \underline{X_m} = \frac{F_0}{\omega_0^2 - \omega^2 + i\frac{\omega_0 \omega}{Q}}
+    \]
+
+    \[
+    \varphi_p(\omega) = \tan^{-1}\left(-\frac{\omega \omega_0 / Q}{\omega_0^2 - \omega^2}\right)
+    \]
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{tikzpicture}
+            \begin{axis}[
+                width=5cm, height=5cm,
+                domain=0:2,
+                samples=200,
+                axis lines=middle,
+                grid=both,
+                grid style={dashed, gray!60},
+                xmin=0, xmax=2,
+                ymin=-pi/2-0.5, ymax=pi/2+0.5,
+                xtick={0,1},
+                xticklabels={$0$,$\omega_0$},
+                ytick={-pi/2,0,pi/2},
+                yticklabels={$-\frac{\pi}{2}$,$0$,$\frac{\pi}{2}$},
+                xlabel={$\omega$},
+                ylabel={$\varphi$},
+            ]
+            \addplot[mark=none, domain=0:0.9999, blue!80!black, thick] 
+                {atan(-(x)/(3*(1-x^2))) * pi/180};
+
+            \addplot[mark=none, domain=1.0001:2, blue!80!black, thick] 
+                {atan(-(x)/(3*(1-x^2))) * pi/180};
+
+            % 
+
+            \end{axis}
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \end{document}
