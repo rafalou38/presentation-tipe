@@ -2,6 +2,8 @@
 \usetheme{SimplePlus}
 
 % Packages pour améliorer les mathématiques
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
@@ -10,6 +12,9 @@
 \usepackage{tikz}
 \usepackage{esvect}
 \usepackage{pgfplots}
+\usepackage[european]{circuitikz}
+\usepackage{siunitx}
+
 \pgfplotsset{compat=1.18}
 
 \usetikzlibrary{%
@@ -164,7 +169,9 @@
 
         \[
             % x(t) = x_0 +\frac{m_p}{k}\frac{\partial B_e}{\partial x}
+            \boxed{
             x_{eq} = \frac{F_{mag}(x_{eq})}{k}
+            }
         \]
 
         Mesure directe de $F_{mag}$.
@@ -245,8 +252,11 @@
     \underline x(t) = \underline X_h e^{(r+i\Omega)t} \qquad
     \]
 
+    % \[
+    % r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1} = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
+    % \]
     \[
-    r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1} = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
+    r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
     \]
 
     \begin{columns}
@@ -284,26 +294,26 @@
     % \]
 \end{frame}
 
-\begin{frame}{Résultats expérimentaux}
-    Règle sans masse ajoutée, régime transitoire libre.
+% \begin{frame}{Résultats expérimentaux}
+%     Règle sans masse ajoutée, régime transitoire libre.
 
-    Prise vidéo 200 images par seconde, pointage python OpenCV.
+%     Prise vidéo 200 images par seconde, pointage python OpenCV.
 
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \begin{figure}
-                \centering
-                \includegraphics[width=\linewidth]{static/libre-s.png}
-            \end{figure}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{figure}
-                \centering
-                \includegraphics[width=\linewidth]{static/montage1.png}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
+%     \begin{columns}
+%         \begin{column}{0.5\textwidth}
+%             \begin{figure}
+%                 \centering
+%                 \includegraphics[width=\linewidth]{static/libre-s.png}
+%             \end{figure}
+%         \end{column}
+%         \begin{column}{0.5\textwidth}
+%             \begin{figure}
+%                 \centering
+%                 \includegraphics[width=\linewidth]{static/montage1.png}
+%             \end{figure}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
 
 
 \begin{frame}{Oscillation forcée}
@@ -359,10 +369,86 @@
 
             % 
 
+            \addplot[mark=none, red, thick] {0.3 / sqrt((1-x^2)^2+(x/3)^2)};
+
             \end{axis}
             \end{tikzpicture}
         \end{column}
     \end{columns}
+\end{frame}
+
+\frame{\frametitle{Interprétation du déphasage}
+    En présence d'un champ et pour $\omega \approx \omega_0$:
+
+    \[
+    \varphi(\omega_0) = \tan^{-1}\left(\frac{k}{Q\frac{\partial F_{mag}}{\partial x}}\right)
+    \]
+
+
+    On déduit:
+
+    \[
+    \Delta \varphi(\omega_0) \approx \frac Qk \frac {\partial F_{mag}}{\partial x}
+    \]
+
+    (A démontrer).
+}
+
+\section{Mise en oeuvre expérimentale du levier}
+
+\frame{\frametitle{Premier dispositif}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{static/exp_01.jpg}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.35\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{static/exp_02.jpg}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+    - Bobine de fil de cuivre (200 tours).
+
+    - Photorésistance (\SI{10}{\kilo\ohm}).
+
+}
+
+\begin{frame}
+    \frametitle{Circuit}
+
+
+\begin{center}
+\begin{circuitikz}
+
+% Générateur
+\draw
+(0,0) node[ground]{}
+to[V, l=$E$] (0,4)
+-- (2,4)
+
+% Photorésistance
+to[photoresistor, l=$R_{LDR}$] (4,4)
+
+% Noeud de sortie
+to[short, -*] (5,4) coordinate (Vout)
+
+% Résistance du pont diviseur
+to[R, l=$R$] (5,0)
+node[ground]{};
+
+% Sortie oscilloscope
+\draw (Vout) -- (7,4)
+node[right]{Sortie oscilloscope (COM1)};
+
+\end{circuitikz}
+\end{center}
+    
+
 \end{frame}
 
 \end{document}
