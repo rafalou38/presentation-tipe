@@ -340,7 +340,7 @@
     \]
 
     \[
-    \varphi_p(\omega) = \tan^{-1}\left(-\frac{\omega \omega_0 / Q}{\omega_0^2 - \omega^2}\right)
+    \tan(\varphi_p(\omega)) = -\frac{\omega \omega_0}{Q(\omega_0^2 - \omega^2)}
     \]
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -353,16 +353,16 @@
                 grid=both,
                 grid style={dashed, gray!60},
                 xmin=0, xmax=2,
-                ymin=-pi/2-0.5, ymax=pi/2+0.5,
+                ymin=-0.5, ymax=pi+0.5,
                 xtick={0,1},
                 xticklabels={$0$,$\omega_0$},
-                ytick={-pi/2,0,pi/2},
-                yticklabels={$-\frac{\pi}{2}$,$0$,$\frac{\pi}{2}$},
+                ytick={-pi/2,0,pi/2, pi},
+                yticklabels={$-\frac{\pi}{2}$,$0$,$\frac{\pi}{2}$, $\pi$},
                 xlabel={$\omega$},
-                ylabel={$\varphi$},
+                ylabel={},
             ]
             \addplot[mark=none, domain=0:0.9999, blue!80!black, thick] 
-                {atan(-(x)/(3*(1-x^2))) * pi/180};
+                {pi+ atan(-(x)/(3*(1-x^2))) * pi/180};
 
             \addplot[mark=none, domain=1.0001:2, blue!80!black, thick] 
                 {atan(-(x)/(3*(1-x^2))) * pi/180};
@@ -377,22 +377,22 @@
     \end{columns}
 \end{frame}
 
-\frame{\frametitle{Interprétation du déphasage}
-    En présence d'un champ et pour $\omega \approx \omega_0$:
+% \frame{\frametitle{Interprétation du déphasage}
+%     En présence d'un champ et pour $\omega \approx \omega_0$:
 
-    \[
-    \varphi(\omega_0) = \tan^{-1}\left(\frac{k}{Q\frac{\partial F_{mag}}{\partial x}}\right)
-    \]
+%     \[
+%     \varphi(\omega_0) = \tan^{-1}\left(\frac{k}{Q\frac{\partial F_{mag}}{\partial x}}\right)
+%     \]
 
 
-    On déduit:
+%     On déduit:
 
-    \[
-    \Delta \varphi(\omega_0) \approx \frac Qk \frac {\partial F_{mag}}{\partial x}
-    \]
+%     \[
+%     \Delta \varphi(\omega_0) \approx \frac Qk \frac {\partial F_{mag}}{\partial x}
+%     \]
 
-    (A démontrer).
-}
+%     (A démontrer).
+% }
 
 \section{Mise en oeuvre expérimentale du levier}
 
