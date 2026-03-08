@@ -87,7 +87,7 @@
 
 \frame{\titlepage}
 
-\begin{frame}{Sommaire}
+\begin{frame}{Plan}
     \tableofcontents
 \end{frame}
 
@@ -398,57 +398,44 @@
 
 \frame{\frametitle{Premier dispositif}
     \begin{columns}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.45\textwidth}
             \begin{figure}
                 \centering
                 \includegraphics[width=\linewidth]{static/exp_01.jpg}
             \end{figure}
         \end{column}
-        \begin{column}{0.35\textwidth}
+        \begin{column}{0.25\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{static/modele_1.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+    Bobine de fil de cuivre (200 tours).
+
+    Levier en fer (baton de ramoneur)
+
+    \[ k= \qquad Q= \qquad f_0 =\]
+
+}
+
+\begin{frame}
+    \frametitle{Captation}
+
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{static/pdt-photo.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
             \begin{figure}
                 \centering
                 \includegraphics[width=\linewidth]{static/exp_02.jpg}
             \end{figure}
         \end{column}
     \end{columns}
-
-    - Bobine de fil de cuivre (200 tours).
-
-    - Photorésistance (\SI{10}{\kilo\ohm}).
-
-}
-
-\begin{frame}
-    \frametitle{Circuit}
-
-
-\begin{center}
-\begin{circuitikz}
-
-% Générateur
-\draw
-(0,0) node[ground]{}
-to[V, l=$E$] (0,4)
--- (2,4)
-
-% Photorésistance
-to[photoresistor, l=$R_{LDR}$] (4,4)
-
-% Noeud de sortie
-to[short, -*] (5,4) coordinate (Vout)
-
-% Résistance du pont diviseur
-to[R, l=$R$] (5,0)
-node[ground]{};
-
-% Sortie oscilloscope
-\draw (Vout) -- (7,4)
-node[right]{Sortie oscilloscope (COM1)};
-
-\end{circuitikz}
-\end{center}
-    
-
 \end{frame}
-
 \end{document}
