@@ -72,11 +72,7 @@
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
       \usebeamerfont{date in head/foot}Candidat 22990 \hfill
-      \ifnum\value{framenumber}<31
-        \textbf{\insertframenumber{/30}}
-      \else
-        \textbf{\insertframenumber{}/\pageref{LastPage}}
-      \fi
+      \textbf{\insertframenumber/\inserttotalframenumber}
     \end{beamercolorbox}}%
     \vskip0pt%
   \fi
@@ -92,6 +88,11 @@
 \end{frame}
 
 \section{Le microscope à force magnétique}
+\begin{frame}
+  \sectionpage{\begin{center}
+    Principe et modélisation
+  \end{center}}
+\end{frame}
 
 \begin{frame}{Principe de fonctionnement}
     \begin{figure}
@@ -159,8 +160,6 @@
             \vv{F_{mag}} = \vv m_p \cdot \vv{\mathrm{grad}} \vv{B}_{e}
         \]
 
-        
-        % \begin{equation}    
         \[      
             mx''(t) + \alpha x'(t) + k x(t) = F_{mag}(x)
         \]
@@ -243,78 +242,6 @@
 
 \end{frame}
 
-\begin{frame}{Analyse des solutions}
-    Solution homogène:
-    % \[
-    % \underline x(t) = \underline X_h \exp{\left(\left[-\frac{\omega_0}{2Q} + i\omega_0 \sqrt{\frac{1}{4Q^2} - 1}\right]t\right)}
-    % \]
-    \[
-    \underline x(t) = \underline X_h e^{(r+i\Omega)t} \qquad
-    \]
-
-    % \[
-    % r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1} = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
-    % \]
-    \[
-    r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
-    \]
-
-    \begin{columns}
-    \begin{column}{0.5\textwidth}
-    Transformée de fourier:
-        \[
-        \underline{\tilde{x}}(\omega) = \int_{0}^{+\infty} \underline x(t) e^{-i\omega t} dt
-        \]
-
-        % \[
-        % \underline x(\omega) = \frac{\underline X_h}{-\frac{\omega_0}{2Q} + i\left(\omega_0 \sqrt{\frac{1}{4Q^2} - 1} - \omega\right)}
-        % \]
-
-        % \[
-        % \underline x(\omega) = \frac{\underline X_h}{-r-i(\Omega - \omega)}
-        % \]
-
-        \[
-            \left|\frac{\underline x(\omega)}{\underline X_h}\right|^2 = \frac{1}{\left(-r\right)^2 + \left(\Omega - \omega\right)^2}
-        \]
-    \end{column}
-    \begin{column}{0.35\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=\linewidth]{static/lorentz.jpg}
-        \end{figure}
-    \end{column}
-        
-    \end{columns}
-
-    % amplitude / np.sqrt(1 + ((x - f0) / (df / 2)) ** 2)
-
-    % \[
-    % |\underline x(\omega)| = \frac{|\underline X_h|}{\sqrt{\left(-\frac{\omega_0}{2Q}\right)^2 + \left(\omega_0 \sqrt{\frac{1}{4Q^2} - 1} - \omega\right)^2}} = \frac{A}{}
-    % \]
-\end{frame}
-
-% \begin{frame}{Résultats expérimentaux}
-%     Règle sans masse ajoutée, régime transitoire libre.
-
-%     Prise vidéo 200 images par seconde, pointage python OpenCV.
-
-%     \begin{columns}
-%         \begin{column}{0.5\textwidth}
-%             \begin{figure}
-%                 \centering
-%                 \includegraphics[width=\linewidth]{static/libre-s.png}
-%             \end{figure}
-%         \end{column}
-%         \begin{column}{0.5\textwidth}
-%             \begin{figure}
-%                 \centering
-%                 \includegraphics[width=\linewidth]{static/montage1.png}
-%             \end{figure}
-%         \end{column}
-%     \end{columns}
-% \end{frame}
-
 
 \begin{frame}{Oscillation forcée}
     Force d'excitation harmonique:
@@ -377,24 +304,10 @@
     \end{columns}
 \end{frame}
 
-% \frame{\frametitle{Interprétation du déphasage}
-%     En présence d'un champ et pour $\omega \approx \omega_0$:
-
-%     \[
-%     \varphi(\omega_0) = \tan^{-1}\left(\frac{k}{Q\frac{\partial F_{mag}}{\partial x}}\right)
-%     \]
-
-
-%     On déduit:
-
-%     \[
-%     \Delta \varphi(\omega_0) \approx \frac Qk \frac {\partial F_{mag}}{\partial x}
-%     \]
-
-%     (A démontrer).
-% }
-
 \section{Mise en oeuvre expérimentale du levier}
+\begin{frame}
+  \sectionpage{}
+\end{frame}
 
 \frame{\frametitle{Premier dispositif}
     \begin{columns}
@@ -407,7 +320,7 @@
         \begin{column}{0.25\textwidth}
             \begin{figure}
                 \centering
-                \includegraphics[width=\linewidth]{static/modele_1.png}
+                \includegraphics[width=\linewidth]{static/modele_2.png}
             \end{figure}
         \end{column}
     \end{columns}
@@ -426,8 +339,12 @@
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{figure}
-                \centering
-                \includegraphics[width=\linewidth]{static/pdt-photo.png}
+
+                \includegraphics[width=0.8\linewidth]{static/pdt-photo.png}
+            \end{figure}
+            \begin{figure}
+
+                \includegraphics[width=\linewidth]{static/force_1.png}
             \end{figure}
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -438,4 +355,186 @@
         \end{column}
     \end{columns}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Régime libre}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{static/libre2.png}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.35\textwidth]{static/demo-mod.jpg}
+    \end{figure}
+    % \begin{figure}
+    %     \centering
+    %     \includegraphics[width=\textwidth]{static/analyse-cut.png}
+    % \end{figure}
+\end{frame}
+\begin{frame}
+    \frametitle{Mode MFM}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{static/analyse-cut.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Mise en place du Quatre-Quadrants}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\linewidth]{static/sd.jpg}
+            \end{figure}
+            Temps de réponse: $100 \mathrm{ns}$
+
+            Dimension: $5 \mathrm{mm}$
+        
+            4 Intensités indépendantes: $I_1, I_2, I_3, I_4$
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\linewidth]{static/4q-spot.png}
+            \end{figure}
+
+            \[
+                x = \frac{(I_1 + I_2) - (I_3 + I_4)}{I_1 + I_2 + I_3 + I_4}
+            \]
+            \[
+                y = \frac{(I_1 + I_4) - (I_2 + I_3)}{I_1 + I_2 + I_3 + I_4}
+            \]
+        \end{column}
+    \end{columns}
+\end{frame}
+\begin{frame}\frametitle{Dispositif experimental}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{static/4q-exp.jpg}
+    \end{figure}
+\end{frame}
+\begin{frame}\frametitle{Traitement informatique}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{static/drawing.jpg}
+        % \includesvg{static/drawing_out.svg}
+    \end{figure}
+\end{frame}
+{
+    \setbeamercolor{background canvas}{bg=black}
+    \begin{frame}[plain]
+        \centering
+        \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{static/nanospeed.jpg}
+    \end{frame}
+}
+
+\begin{frame}
+    \title{Résultats}
+
+    \begin{itemize}
+        \item Caractérisation de l'effet filtre avec sweep fréquence
+        \item Analyse précise de l'effet d'un aimant et verif si équivalent
+    \end{itemize}
+\end{frame}
+
+\section{Le réseau de Halbach}
+\begin{frame}
+  \sectionpage{}
+\end{frame}
+
+
+\section{Annexes}
+\begin{frame}
+  \sectionpage{}
+\end{frame}a
+
+\frame{\frametitle{Interprétation du déphasage}
+    En présence d'un champ et pour $\omega \approx \omega_0$:
+
+    \[
+    \varphi(\omega_0) = \tan^{-1}\left(\frac{k}{Q\frac{\partial F_{mag}}{\partial x}}\right)
+    \]
+
+    On déduit:
+
+    \[
+    \Delta \varphi(\omega_0) \approx \frac Qk \frac {\partial F_{mag}}{\partial x}
+    \]
+
+    (A démontrer).
+}
+
+\begin{frame}{Analyse des solutions}
+    Solution homogène:
+    % \[
+    % \underline x(t) = \underline X_h \exp{\left(\left[-\frac{\omega_0}{2Q} + i\omega_0 \sqrt{\frac{1}{4Q^2} - 1}\right]t\right)}
+    % \]
+    \[
+    \underline x(t) = \underline X_h e^{(r+i\Omega)t} \qquad
+    \]
+
+    % \[
+    % r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \omega_0 \sqrt{\frac{1}{4Q^2} - 1} = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
+    % \]
+    \[
+    r = -\frac{\omega_0}{2Q} = -\frac{\alpha}{2m} \qquad \Omega = \sqrt{\frac{\alpha^2}{4m^2} - \frac{k_{e}}{m}}
+    \]
+
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+    Transformée de fourier:
+        \[
+        \underline{\tilde{x}}(\omega) = \int_{0}^{+\infty} \underline x(t) e^{-i\omega t} dt
+        \]
+
+        % \[
+        % \underline x(\omega) = \frac{\underline X_h}{-\frac{\omega_0}{2Q} + i\left(\omega_0 \sqrt{\frac{1}{4Q^2} - 1} - \omega\right)}
+        % \]
+
+        % \[
+        % \underline x(\omega) = \frac{\underline X_h}{-r-i(\Omega - \omega)}
+        % \]
+
+        \[
+            \left|\frac{\underline x(\omega)}{\underline X_h}\right|^2 = \frac{1}{\left(-r\right)^2 + \left(\Omega - \omega\right)^2}
+        \]
+    \end{column}
+    \begin{column}{0.35\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{static/lorentz.jpg}
+        \end{figure}
+    \end{column}
+        
+    \end{columns}
+
+    % amplitude / np.sqrt(1 + ((x - f0) / (df / 2)) ** 2)
+
+    % \[
+    % |\underline x(\omega)| = \frac{|\underline X_h|}{\sqrt{\left(-\frac{\omega_0}{2Q}\right)^2 + \left(\omega_0 \sqrt{\frac{1}{4Q^2} - 1} - \omega\right)^2}} = \frac{A}{}
+    % \]
+\end{frame}
+
+\begin{frame}{Résultats expérimentaux}
+    Règle sans masse ajoutée, régime transitoire libre.
+
+    Prise vidéo 200 images par seconde, pointage python OpenCV.
+
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{static/libre-s.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{static/montage1.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
 \end{document}
